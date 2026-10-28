@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Crown Cuts | Appointment Dashboard</title>
+  <link rel="stylesheet" href="/admin.css">
+  <link rel="stylesheet" href="/admin-voice-navigation.css">
+</head>
+<body data-voice-navigation="admin">
+  <div class="shell">
+    <aside class="sidebar"><div class="brand"><img src="/images/ChatGPT%20Image%20Oct%202,%202026,%2010_00_04%20AM.png" alt=""> <span>CROWN CUTS</span></div><div class="nav-label">WORKSPACE</div><div class="active">Appointments</div><button id="logout" type="button">Sign out</button></aside>
+    <main class="main">
+      <header><div><div class="date-label">Crown Cuts administration</div><h1>Appointments</h1></div><div id="today" class="date-label"></div></header>
+      <section class="stats" aria-label="Appointment statistics">
+        <article class="stat"><strong id="total">—</strong><span>Total appointments</span></article>
+        <article class="stat pending"><strong id="pending">—</strong><span>Pending</span></article>
+        <article class="stat confirmed"><strong id="confirmed">—</strong><span>Confirmed</span></article>
+        <article class="stat cancelled"><strong id="cancelled">—</strong><span>Cancelled</span></article>
+      </section>
+      <section class="panel">
+        <div class="filters">
+          <input id="search" type="search" placeholder="Search name, phone or service" aria-label="Search appointments">
+          <select id="status-filter" aria-label="Filter by status"><option value="">All statuses</option><option value="requested">Pending</option><option value="confirmed">Confirmed</option><option value="cancelled">Cancelled</option></select>
+          <input id="from" type="date" aria-label="Appointments from date">
+          <input id="to" type="date" aria-label="Appointments until date">
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <div id="message" role="status"></div>
+      </section>
+    </main>
+  </div>
+  <script src="/admin.js"></script>
+  <script src="/admin-voice-navigation.js"></script>
+</body>
+</html>

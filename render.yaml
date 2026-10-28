@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: crown-cuts
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: CROWN_CUTS_ADMIN_USERNAME
+        sync: false
+      - key: CROWN_CUTS_ADMIN_PASSWORD_HASH
+        sync: false

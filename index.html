@@ -6,7 +6,9 @@
     <meta name="description" content="Crown Cuts is your place for fresh cuts, clean fades, and classic barbering. Find a service and request an appointment.">
     <title>Crown Cuts | Barbershop &amp; Grooming</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="voice-navigation.css">
     <script src="script.js" defer></script>
+    <script src="voice-navigation.js" defer></script>
 </head>
 <body>
     <header class="site-header">
@@ -102,7 +104,7 @@
 
         <section class="about" id="about">
             <div class="about-image">
-                <img src="images/download.jpg" alt="A barber at work in the shop">
+                <img src="images/woman3%20(2).jpg" alt="A finished natural hairstyle with twists and volume">
                 <span class="about-stamp">GOOD PEOPLE.<br>GOOD CUTS.</span>
             </div>
             <div class="about-copy">
@@ -116,23 +118,47 @@
 
         <section class="gallery section-wrap" id="gallery">
             <div class="section-heading">
-                <div><p class="eyebrow">FRESH FROM THE CHAIR</p><h2>A few of our <em>looks.</em></h2></div>
-                <p>Need a little inspiration? Take a look at some of the cuts and styles we love.</p>
+                <div><p class="eyebrow">FRESH FROM THE CHAIR</p><h2>Styles for <em>everyone.</em></h2></div>
+                <p>From sharp cuts and fades to braids and natural styles, find a little inspiration for your next visit.</p>
             </div>
-            <div class="gallery-grid">
-                <figure class="gallery-item gallery-tall">
-                    <img src="images/images%20(1).jpg" alt="Barber chairs and mirrors in a bright barbershop">
-                    <figcaption>THE SPACE <span>01</span></figcaption>
-                </figure>
-                <figure class="gallery-item">
-                    <img src="images/beforimages%20(2).jpg" alt="A fresh fade and beard shape-up">
-                    <figcaption>THE FADE <span>02</span></figcaption>
-                </figure>
-                <figure class="gallery-item">
-                    <img src="images/beforeandafter.jpg" alt="Before and after a fresh haircut">
-                    <figcaption>THE TRANSFORMATION <span>03</span></figcaption>
-                </figure>
-            </div>
+            <section class="gallery-collection" aria-labelledby="mens-gallery-title">
+                <h3 class="gallery-collection-title" id="mens-gallery-title">Men’s cuts &amp; the shop</h3>
+                <div class="gallery-grid">
+                    <figure class="gallery-item gallery-tall">
+                        <img src="images/images.jpg" alt="Warmly lit barbershop with classic barber chairs">
+                        <figcaption>THE SHOP <span>01</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/beforimages%20(2).jpg" alt="Men’s haircut showing a clean fade and beard shape">
+                        <figcaption>THE FADE <span>02</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/beforeandafter.jpg" alt="Before and after a men’s haircut and beard trim">
+                        <figcaption>THE TRANSFORMATION <span>03</span></figcaption>
+                    </figure>
+                </div>
+            </section>
+            <section class="gallery-collection" aria-labelledby="womens-gallery-title">
+                <h3 class="gallery-collection-title" id="womens-gallery-title">Braids &amp; natural styles</h3>
+                <div class="gallery-grid">
+                    <figure class="gallery-item gallery-tall">
+                        <img src="images/woman1%20(2).jpg" alt="Neat cornrow braids styled into a natural puff">
+                        <figcaption>CORNROW STYLE <span>01</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/woman2%20(1).jpg" alt="Decorative braided hairstyle with golden highlights">
+                        <figcaption>BRAIDS WITH DETAIL <span>02</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/woman3%20(2).jpg" alt="Twists and natural curls styled in a high puff">
+                        <figcaption>TWISTS &amp; TEXTURE <span>03</span></figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="images/woman4%282%29.jpg" alt="A stylist carefully finishing long braids">
+                        <figcaption>THE FINISHING TOUCH <span>04</span></figcaption>
+                    </figure>
+                </div>
+            </section>
         </section>
 
         <section class="booking" id="booking">
@@ -144,7 +170,7 @@
             </div>
             <form class="booking-form">
                 <label for="name">Your name</label>
-                <input id="name" name="name" type="text" autocomplete="name" placeholder="e.g. Alex Smith" required>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="e.g. paul mwale" required>
 
                 <label for="phone">Phone number</label>
                 <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Best number to reach you" required>
@@ -167,7 +193,8 @@
                 </div>
 
                 <button class="button form-button" type="submit">Request an appointment <span aria-hidden="true">↗</span></button>
-                <p class="form-message" role="status" aria-live="polite">This demo form does not send bookings yet. Connect a booking service to receive requests.</p>
+                <p class="form-message" role="status" aria-live="polite">Appointment requests are saved securely at Crown Cuts.</p>
+                <button class="button button-light cancel-appointment-button" id="cancel-appointment" type="button" hidden>Cancel this appointment</button>
             </form>
         </section>
 

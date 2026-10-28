@@ -1,0 +1,21 @@
+{
+  "name": "crown-cuts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "setup:admin": "node create-admin-config.js",
+    "admin:hash": "node create-admin-config.js --print-hash",
+    "test": "node --test",
+    "migrate:neon": "node scripts/migrate-sqlite-to-neon.js",
+    "test:neon": "node scripts/verify-neon.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.5",
+    "@neon/env": "^1.6.6",
+    "pg": "^8.23.1"
+  }
+}

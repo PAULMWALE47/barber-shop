@@ -1,0 +1,8 @@
+data/appointments.sqlite
+data/admin.json
+data/*.sqlite
+.env
+.env.*
+!.env.example
+.neon
+node_modules/

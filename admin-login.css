@@ -1,0 +1,123 @@
+:root {
+    --ink: #211e19;
+    --paper: #f5f2ec;
+    --gold: #c59a5b;
+    --white: #fffdf9;
+    --muted: #746e64;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 24px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 82% 12%, rgba(197,154,91,.16), transparent 26%),
+        linear-gradient(145deg, #ede8df 0%, #faf8f3 100%);
+    color: var(--ink);
+    font: 14px/1.5 'DM Sans', sans-serif;
+}
+
+body::before {
+    position: fixed;
+    left: -60px;
+    bottom: -90px;
+    color: rgba(197,154,91,.06);
+    content: "C";
+    font: 460px/1 'Playfair Display', serif;
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    width: min(430px, 100%);
+    padding: 44px;
+    border-top: 3px solid var(--gold);
+    background: var(--white);
+    box-shadow: 0 28px 90px rgba(33,30,25,.16);
+}
+
+.mark {
+    display: flex;
+    width: 72px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(197,154,91,.45);
+    border-radius: 50%;
+    background: #211e19;
+}
+
+.mark img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+}
+
+h1 {
+    margin: 25px 0 7px;
+    font: 500 38px/1.1 'Playfair Display', Georgia, serif;
+}
+
+p { margin: 0 0 28px; color: var(--muted); }
+
+label {
+    display: block;
+    margin: 19px 0 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid #dcd5ca;
+    border-radius: 0;
+    outline: none;
+    background: #fff;
+    color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(197,154,91,.13);
+}
+
+button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 24px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .02em;
+    cursor: pointer;
+    transition: background .2s, border-color .2s;
+}
+
+button:hover { border-color: #a27438; background: #a27438; }
+button:disabled { opacity: .65; cursor: wait; }
+
+#message {
+    min-height: 22px;
+    margin: 14px 0 0;
+    color: #9a382f;
+    font-size: 12px;
+}
+
+a { color: #805d31; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+    body { align-items: start; padding: 16px; }
+    main { margin-top: 10vh; padding: 32px 24px; }
+    h1 { font-size: 32px; }
+}

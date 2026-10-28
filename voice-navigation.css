@@ -1,0 +1,70 @@
+.voice-navigation {
+    position: fixed;
+    z-index: 20;
+    right: 22px;
+    bottom: 22px;
+    width: min(310px, calc(100vw - 32px));
+    padding: 17px;
+    border: 1px solid #d5c8b3;
+    background: #fffdf9;
+    box-shadow: 0 12px 35px rgb(33 30 25 / 18%);
+    color: #211e19;
+    font: 13px/1.5 Arial, sans-serif;
+}
+
+.voice-navigation-title {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.voice-navigation-toggle {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid #211e19;
+    background: #211e19;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.voice-navigation-toggle:hover {
+    border-color: #a27438;
+    background: #a27438;
+}
+
+.voice-navigation-toggle:focus-visible {
+    outline: 3px solid #c59a5b;
+    outline-offset: 3px;
+}
+
+.voice-navigation-toggle:disabled {
+    cursor: not-allowed;
+    opacity: .65;
+}
+
+.voice-navigation-status {
+    min-height: 20px;
+    margin: 10px 0 4px;
+    color: #514a40;
+}
+
+.voice-navigation-help {
+    margin: 0;
+    color: #746e64;
+    font-size: 11px;
+}
+
+.voice-navigation-privacy {
+    margin: 8px 0 0;
+    color: #746e64;
+    font-size: 10px;
+}
+
+@media (max-width: 560px) {
+    .voice-navigation {
+        right: 12px;
+        bottom: 12px;
+    }
+}
