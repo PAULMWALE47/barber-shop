@@ -550,7 +550,7 @@ function createServer({
     return server;
 }
 
-if (require.main === module) {
+   if (require.main === module || process.env.VERCEL)  {
     try {
         process.loadEnvFile(path.join(__dirname, ".env.local"));
     } catch (error) {
