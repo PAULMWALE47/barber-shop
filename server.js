@@ -550,7 +550,7 @@ function createServer({
     return server;
 }
 
-   if (require.main === module || process.env.VERCEL)  {
+   if (require.main === module) {
     try {
         process.loadEnvFile(path.join(__dirname, ".env.local"));
     } catch (error) {
@@ -569,3 +569,8 @@ module.exports = {
     createServer,
     validateAppointment,
 };
+
+if (process.env.VERCEL) {
+    const vercelServer = createServer();
+    module.exports = (request, response) => vercelServer.emit("request", request, response);
+}
