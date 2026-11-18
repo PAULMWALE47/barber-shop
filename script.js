@@ -23,6 +23,12 @@ navigation.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMenu);
 });
 
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 720) {
+        closeMenu();
+    }
+});
+
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         closeMenu();

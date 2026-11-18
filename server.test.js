@@ -206,6 +206,28 @@ test("protects admin dashboard and updates appointment status", async () => {
         const adminVoiceStyles = await fetch(`${origin}/admin-voice-navigation.css`, { headers: { Cookie: cookie } });
         assert.equal(adminVoiceStyles.status, 200);
 
+        const booking = await fetch(`${origin}/api/appointments`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: "New Customer",
+                phone: "0123456789",
+                service: "The classic cut",
+                appointmentDate: "2099-01-01",
+            }),
+        });
+        assert.equal(booking.status, 201);
+
+        const newAppointment = await fetch(
+            `${origin}/api/admin/appointments?search=New+Customer`,
+            { headers: { Cookie: cookie } },
+        );
+        assert.equal(newAppointment.status, 200);
+        const newAppointmentBody = await newAppointment.json();
+        assert.equal(newAppointmentBody.appointments.length, 1);
+        assert.equal(newAppointmentBody.appointments[0].name, "New Customer");
+        assert.equal(newAppointmentBody.stats.pending, 1);
+
         const database = new DatabaseSync(databasePath);
         const result = database.prepare(`
             INSERT INTO appointments (name, phone, service, appointment_date)

@@ -3,19 +3,96 @@
     z-index: 20;
     right: 22px;
     bottom: 22px;
-    width: min(310px, calc(100vw - 32px));
-    padding: 17px;
-    border: 1px solid #d5c8b3;
-    background: #fffdf9;
-    box-shadow: 0 12px 35px rgb(33 30 25 / 18%);
+    width: auto;
+    max-width: min(310px, calc(100vw - 32px));
+    padding: 0;
+    border: 0;
+    background: transparent;
     color: #211e19;
     font: 13px/1.5 Arial, sans-serif;
 }
 
+.voice-navigation-launcher {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #a27438;
+    border-radius: 50%;
+    background: rgb(197 154 91 / 92%);
+    box-shadow: 0 4px 16px rgb(33 30 25 / 24%);
+    color: #211e19;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.voice-navigation-launcher:hover {
+    background: rgb(197 154 91 / 100%);
+    box-shadow: 0 6px 20px rgb(33 30 25 / 30%);
+    transform: translateY(-1px);
+}
+
+.voice-navigation-launcher svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+}
+
+.voice-navigation-launcher:focus-visible,
+.voice-navigation-close:focus-visible {
+    outline: 3px solid #c59a5b;
+    outline-offset: 3px;
+}
+
+.voice-navigation-panel[hidden] {
+    display: none;
+}
+
+.voice-navigation-panel {
+    width: min(310px, calc(100vw - 32px));
+    margin-bottom: 10px;
+    padding: 16px;
+    border: 1px solid rgb(213 200 179 / 75%);
+    background: rgb(255 253 249 / 88%);
+    box-shadow: 0 8px 26px rgb(33 30 25 / 13%);
+    color: #211e19;
+    font: 13px/1.5 Arial, sans-serif;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.voice-navigation-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
 .voice-navigation-title {
-    margin: 0 0 10px;
+    margin: 0;
     font-size: 13px;
     font-weight: 700;
+}
+
+.voice-navigation-close {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #514a40;
+    cursor: pointer;
+    font: 24px/1 Arial, sans-serif;
 }
 
 .voice-navigation-toggle {
@@ -66,5 +143,10 @@
     .voice-navigation {
         right: 12px;
         bottom: 12px;
+    }
+
+    .voice-navigation-launcher {
+        width: 44px;
+        height: 44px;
     }
 }

@@ -20,6 +20,7 @@ html {
 
 body {
     margin: 0;
+    overflow-x: hidden;
     color: var(--ink);
     background: var(--white);
     font-family: 'DM Sans', Arial, sans-serif;
@@ -215,6 +216,7 @@ h2 em {
 .hero-image {
     position: relative;
     min-height: 580px;
+    margin-right: 6%;
     background: #40382f;
 }
 
@@ -839,6 +841,7 @@ h2 {
 
     .hero-image {
         min-height: 330px;
+        margin: 0 7%;
     }
 
     .hero-decoration {
@@ -948,28 +951,64 @@ h2 {
 }
 
 @media (max-width: 420px) {
+    .hero-copy {
+        padding: 52px 7% 38px;
+    }
+
+    .hero h1 {
+        font-size: clamp(43px, 13vw, 54px);
+    }
+
     .hero-actions {
         align-items: flex-start;
         flex-direction: column;
         gap: 17px;
     }
 
+    .hero-actions .button {
+        width: 100%;
+    }
+
     .hero-image {
         min-height: 260px;
     }
 
+    .image-label {
+        right: 18px;
+        bottom: 18px;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
     .service-card {
-        min-height: 250px;
-        padding: 18px 13px;
+        min-height: 220px;
+        padding: 20px 18px;
     }
 
     .service-card h3 {
-        font-size: 17px;
+        font-size: 19px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
+    }
+
+    .gallery-tall {
+        grid-column: span 1;
     }
 
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;
+    }
+
+    .booking-form input,
+    .booking-form select {
+        min-height: 46px;
+        font-size: 16px;
     }
 
     .booking-form {
@@ -979,6 +1018,55 @@ h2 {
     .back-to-top,
     .copyright {
         font-size: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .site-header {
+        padding-right: 4%;
+        padding-left: 4%;
+    }
+
+    .brand {
+        font-size: 11px;
+    }
+
+    .brand img {
+        width: 31px;
+        height: 31px;
+    }
+
+    .section-wrap,
+    .booking {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .hero-copy,
+    .about-copy {
+        padding-right: 6%;
+        padding-left: 6%;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .welcome-details {
+        flex-direction: column;
+    }
+
+    .booking-form {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .booking-copy h2 {
+        font-size: 40px;
+    }
+
+    .site-footer {
+        gap: 12px;
     }
 }
 

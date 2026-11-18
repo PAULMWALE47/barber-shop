@@ -6,6 +6,8 @@ const from = document.querySelector("#from");
 const to = document.querySelector("#to");
 let csrfToken = "";
 let loadTimer;
+let appointmentsLoading = false;
+let reloadAfterCurrent = false;
 
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;",
@@ -20,6 +22,12 @@ async function request(url, options = {}) {
 }
 
 async function loadAppointments() {
+    if (appointmentsLoading) {
+        reloadAfterCurrent = true;
+        return;
+    }
+
+    appointmentsLoading = true;
     const parameters = new URLSearchParams();
     if (search.value) parameters.set("search", search.value);
     if (statusFilter.value) parameters.set("status", statusFilter.value);
@@ -47,6 +55,12 @@ async function loadAppointments() {
             </tr>`).join("") : '<tr><td colspan="5" class="empty">No appointments match these filters.</td></tr>';
     } catch (error) {
         message.textContent = error.message;
+    } finally {
+        appointmentsLoading = false;
+        if (reloadAfterCurrent) {
+            reloadAfterCurrent = false;
+            void loadAppointments();
+        }
     }
 }
 
@@ -98,6 +112,12 @@ document.querySelector("#today").textContent = new Intl.DateTimeFormat(undefined
         const session = await request("/api/admin/session");
         csrfToken = session.csrfToken;
         await loadAppointments();
+        const refreshIfVisible = () => {
+            if (document.visibilityState === "visible") void loadAppointments();
+        };
+        window.addEventListener("focus", refreshIfVisible);
+        document.addEventListener("visibilitychange", refreshIfVisible);
+        window.setInterval(refreshIfVisible, 15000);
     } catch (error) {
         message.textContent = error.message;
     }

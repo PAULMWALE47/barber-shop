@@ -5,17 +5,43 @@
     panel.className = "voice-navigation";
     panel.setAttribute("aria-label", "Voice navigation");
     panel.innerHTML = `
-        <p class="voice-navigation-title">Voice navigation</p>
-        <button class="voice-navigation-toggle" type="button" aria-pressed="false">Start listening</button>
-        <p class="voice-navigation-status" role="status" aria-live="polite">Microphone is off.</p>
-        <p class="voice-navigation-help">Say “go to services”, “go to booking”, or “go to contact”.</p>
-        <p class="voice-navigation-privacy">After you turn it on, voice commands stay active until you turn them off. Your browser’s speech service may process audio; Crown Cuts does not store it.</p>
+        <button class="voice-navigation-launcher" type="button" aria-label="Open voice navigation" aria-controls="voice-navigation-panel" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"></path>
+                <path d="M19 11a7 7 0 0 1-14 0M12 18v4m-4 0h8"></path>
+            </svg>
+        </button>
+        <div class="voice-navigation-panel" id="voice-navigation-panel" hidden>
+            <div class="voice-navigation-heading">
+                <p class="voice-navigation-title">Voice navigation</p>
+                <button class="voice-navigation-close" type="button" aria-label="Close voice navigation">×</button>
+            </div>
+            <button class="voice-navigation-toggle" type="button" aria-pressed="false">Start listening</button>
+            <p class="voice-navigation-status" role="status" aria-live="polite">Microphone is off.</p>
+            <p class="voice-navigation-help">Say “go to services”, “go to booking”, or “go to contact”.</p>
+            <p class="voice-navigation-privacy">After you turn it on, voice commands stay active until you turn them off. Your browser’s speech service may process audio; Crown Cuts does not store it.</p>
+        </div>
     `;
     document.body.append(panel);
 
+    const launcher = panel.querySelector(".voice-navigation-launcher");
+    const details = panel.querySelector(".voice-navigation-panel");
+    const closeButton = panel.querySelector(".voice-navigation-close");
     const toggle = panel.querySelector(".voice-navigation-toggle");
     const status = panel.querySelector(".voice-navigation-status");
     const help = panel.querySelector(".voice-navigation-help");
+
+    launcher.addEventListener("click", () => {
+        details.hidden = false;
+        launcher.setAttribute("aria-expanded", "true");
+        closeButton.focus();
+    });
+
+    closeButton.addEventListener("click", () => {
+        details.hidden = true;
+        launcher.setAttribute("aria-expanded", "false");
+        launcher.focus();
+    });
 
     if (!SpeechRecognition) {
         toggle.disabled = true;
