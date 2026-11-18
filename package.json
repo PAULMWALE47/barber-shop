@@ -11,7 +11,7 @@
     "test:neon": "node scripts/verify-neon.js"
   },
   "engines": {
-    "node": ">=22.5.0"
+    "node": "24.x"
   },
   "dependencies": {
     "@neon/config": "^1.9.5",
