@@ -151,6 +151,9 @@ test("protects admin dashboard and updates appointment status", async () => {
         const dashboard = await fetch(`${origin}/admin`);
         assert.equal(dashboard.status, 200);
         assert.match(await dashboard.text(), /Admin sign in/);
+        const nestedDashboard = await fetch(`${origin}/admin/appointments`);
+        assert.equal(nestedDashboard.status, 200);
+        assert.match(await nestedDashboard.text(), /Admin sign in/);
         const encodedLogo = await fetch(`${origin}/images/ChatGPT%20Image%20Oct%202,%202026,%2010_00_04%20AM.png`);
         assert.equal(encodedLogo.status, 200);
         assert.match(encodedLogo.headers.get("content-type"), /^image\/png/);
@@ -201,6 +204,16 @@ test("protects admin dashboard and updates appointment status", async () => {
         assert.match(login.headers.get("set-cookie"), /SameSite=Strict/);
         assert.match(dashboard.headers.get("content-security-policy"), /style-src 'self'/);
         const { csrfToken } = await login.json();
+        const adminPage = await fetch(`${origin}/admin/appointments`, { headers: { Cookie: cookie } });
+        assert.equal(adminPage.status, 200);
+        const adminHtml = await adminPage.text();
+        assert.match(adminHtml, /href="\/style\.css"/);
+        assert.match(adminPage.headers.get("content-security-policy"), /fonts\.googleapis\.com/);
+        assert.match(adminPage.headers.get("content-security-policy"), /fonts\.gstatic\.com/);
+        const adminStyles = await fetch(`${origin}/admin.css`, { headers: { Cookie: cookie } });
+        assert.equal(adminStyles.status, 200);
+        assert.match(adminStyles.headers.get("content-type"), /^text\/css/);
+        assert.match(await adminStyles.text(), /\.logo\s*\{[\s\S]*max-width:\s*150px/);
         const adminVoiceScript = await fetch(`${origin}/admin-voice-navigation.js`, { headers: { Cookie: cookie } });
         assert.equal(adminVoiceScript.status, 200);
         const adminVoiceStyles = await fetch(`${origin}/admin-voice-navigation.css`, { headers: { Cookie: cookie } });
@@ -350,10 +363,15 @@ test("serves the website", async () => {
         assert.match(html, /A finished natural hairstyle with twists and volume/);
         assert.equal((html.match(/class="gallery-item/g) || []).length, 7);
         assert.match(html, /Men’s cuts &amp; the shop/);
-        assert.match(html, /src="images\/images\.jpg"/);
-        assert.match(html, /images\/beforimages%20\(2\)\.jpg/);
-        assert.match(html, /images\/beforeandafter\.jpg/);
-        assert.match(html, /woman4%282%29\.jpg/);
+        assert.match(html, /src="\/images\/images\.jpg"/);
+        assert.match(html, /\/images\/beforimages%20\(2\)\.jpg/);
+        assert.match(html, /\/images\/beforeandafter\.jpg/);
+        assert.match(html, /\/images\/woman4%282%29\.jpg/);
+
+        const stylesheet = await fetch(`${origin}/style.css`);
+        assert.equal(stylesheet.status, 200);
+        const clientScript = await fetch(`${origin}/script.js`);
+        assert.equal(clientScript.status, 200);
 
         const privateFileResponse = await fetch(`${origin}/server.js`);
         assert.equal(privateFileResponse.status, 404);

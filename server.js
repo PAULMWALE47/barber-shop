@@ -115,7 +115,7 @@ function sessionCookie(value, expires, secure) {
 function sendAdminHtml(response, htmlPath, session, secureCookies) {
     const headers = {
         "Cache-Control": "no-store",
-        "Content-Security-Policy": "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'",
+        "Content-Security-Policy": "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'",
         "Content-Type": "text/html; charset=utf-8",
         "Referrer-Policy": "no-referrer",
         "X-Content-Type-Options": "nosniff",
@@ -436,7 +436,7 @@ function createServer({
             return;
         }
 
-        if (url.pathname === "/admin" || url.pathname === "/admin/") {
+        if (/^\/admin(?:\/.*)?$/.test(url.pathname)) {
             if (request.method !== "GET") {
                 response.writeHead(405, { Allow: "GET" });
                 response.end();

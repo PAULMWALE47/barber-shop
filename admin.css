@@ -11,6 +11,11 @@
 
 * { box-sizing: border-box; }
 
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+
 body {
     margin: 0;
     background: #edeae3;

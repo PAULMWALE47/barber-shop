@@ -3,5 +3,11 @@
     "server.js": {
       "includeFiles": "**"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/server.js"
+    }
+  ]
 }
