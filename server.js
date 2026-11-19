@@ -113,16 +113,28 @@ function sessionCookie(value, expires, secure) {
 }
 
 function sendAdminHtml(response, htmlPath, session, secureCookies) {
+    const isDashboard = path.basename(htmlPath) === "admin.html";
+    const styleNonce = isDashboard ? crypto.randomBytes(16).toString("base64") : "";
+    let html = readFileSync(htmlPath, "utf8");
+    if (isDashboard) {
+        const styles = ["style.css", "admin.css", "voice-navigation.css"]
+            .map((filename) => readFileSync(path.join(__dirname, filename), "utf8"))
+            .join("\n");
+        html = html
+            .replace("__ADMIN_STYLE_NONCE__", styleNonce)
+            .replace("__ADMIN_STYLES__", () => styles);
+    }
+
     const headers = {
         "Cache-Control": "no-store",
-        "Content-Security-Policy": "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'",
+        "Content-Security-Policy": `default-src 'self'; style-src 'self' https://fonts.googleapis.com${styleNonce ? ` 'nonce-${styleNonce}'` : ""}; font-src 'self' https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'`,
         "Content-Type": "text/html; charset=utf-8",
         "Referrer-Policy": "no-referrer",
         "X-Content-Type-Options": "nosniff",
     };
     if (session) headers["Set-Cookie"] = sessionCookie(session.id, session.expiresAt, secureCookies);
     response.writeHead(200, headers);
-    response.end(readFileSync(htmlPath));
+    response.end(html);
 }
 
 function serveAdminAsset(response, filename, contentType) {

@@ -207,9 +207,14 @@ test("protects admin dashboard and updates appointment status", async () => {
         const adminPage = await fetch(`${origin}/admin/appointments`, { headers: { Cookie: cookie } });
         assert.equal(adminPage.status, 200);
         const adminHtml = await adminPage.text();
-        assert.match(adminHtml, /href="\/style\.css"/);
+        const styleNonce = /<style nonce="([^"]+)">/.exec(adminHtml)?.[1];
+        assert.ok(styleNonce);
+        assert.match(adminHtml, /\.shell\s*\{[\s\S]*grid-template-columns/);
+        assert.match(adminHtml, /\.voice-navigation-launcher\s*\{/);
+        assert.doesNotMatch(adminHtml, /<link rel="stylesheet"/);
         assert.match(adminPage.headers.get("content-security-policy"), /fonts\.googleapis\.com/);
         assert.match(adminPage.headers.get("content-security-policy"), /fonts\.gstatic\.com/);
+        assert.match(adminPage.headers.get("content-security-policy"), new RegExp(`'nonce-${styleNonce}'`));
         const adminStyles = await fetch(`${origin}/admin.css`, { headers: { Cookie: cookie } });
         assert.equal(adminStyles.status, 200);
         assert.match(adminStyles.headers.get("content-type"), /^text\/css/);
