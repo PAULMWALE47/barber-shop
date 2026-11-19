@@ -4,10 +4,13 @@
       "includeFiles": "**"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/:path*",
-      "destination": "/server.js"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ]
 }
